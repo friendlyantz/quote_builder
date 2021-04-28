@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @quote.title %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @quote.email %>
+</p>
+
+<ul>
+<% @quote.products.each do |quote_product| %>
+  <li>
+    <%= quote_product.amount %> <%= quote_product.name %> for $<%= quote_product.cost %>
+    <%= button_to 'Remove', quote_product_path(@quote, quote_product), method: 'delete' %>
+  </li>
+<% end %>
+  <li>For a Total of $<%= @quote.total_cost %></li>
+</ul>
+
+<%= link_to 'Edit', edit_quote_path(@quote) %> |
+<%= link_to 'Add Product', new_quote_product_path(@quote) %> |
+<%= link_to 'Back', quotes_path %>
