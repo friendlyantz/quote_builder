@@ -1,4 +1,5 @@
 <%= form_with(model: quote_product) do |form| %>
+<%# FIXME simple_form gem can be a better alternative to standard form %>
   <% if quote_product.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(quote_product.errors.count, "error") %> prohibited this quote_product from being saved:</h2>

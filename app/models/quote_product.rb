@@ -1,9 +1,10 @@
 class QuoteProduct < ApplicationRecord
   belongs_to :quote
 
-  enum product: { book: 1, face_mask: 2, first_aid_kit: 3 }
+  enum product: { book: 1, face_mask: 2, first_aid_kit: 3 }  #FIXME 1. poor naming, should be plural. 2. to be a separate model or STI.
 
-  validates :product, :amount, presence: true
+
+  validates :product, :amount, presence: true #FIXME amount is verified below. double up validation
   validates :amount, inclusion: (1..9999)
 
   def cost
@@ -15,7 +16,7 @@ class QuoteProduct < ApplicationRecord
   end
 
   def individual_cost
-    if face_mask?
+    if face_mask? #FIXME case logic can be used
       1
     elsif first_aid_kit?
       10
@@ -24,16 +25,16 @@ class QuoteProduct < ApplicationRecord
     end
   end
 
-  def tax
-    if book?
+  def tax #FIXME can be confused with tax rate
+    if book? #FIXME case logic can be used
       tax_free_cost * 0.1
     else
       0
     end
   end
 
-  def import_duty
-    if first_aid_kit?
+  def import_duty #FIXME can be confused with import_duty rate
+    if first_aid_kit? #FIXME case logic can be used
       0
     else
       tax_free_cost * 0.05
