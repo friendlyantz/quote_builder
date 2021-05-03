@@ -33,3 +33,6 @@
 /config/master.key
 
 /e2e/node_modules
+
+# /spec/examples.txt
+/spec/examples.txt 

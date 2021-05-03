@@ -3,13 +3,14 @@
 # Code Review
 Using enums leads to more and more conditional statements(for taxes, import duties, etc.). To make matters worse these conditionals end up living in the base Quote_Product model further cluttering its domain. We could move these into a concern but that is essentially equivalent to sweeping the dirt elsewhere. We still have a pattern that left unchecked will lead to bloat in our application.
 ## General
-* `#FIXME` used to review original code and will be added in first commit
+* `hashtag FIXME` used to review original code and will be added in first commit
+
 ### Models
 
 * `QuoteProduct`: poor naming - double ups with it's enum `product` column. product ideally to be moved into a separate table(advanced) or morph into Single Table Inheritance (STI) architecture(simpler) 
 * double up validations for `amount`
 * enum `products` column should be plural
-* `QuoteProduct` `case` logic can be used instead of `if`
+* `QuoteProduct` `case` logic could be used instead of `if`. However rubocop preference is `'if` logic still, since case should be empty in original code
 * `QuoteProduct``tax` method: poor naming - can be confused with tax rate
 * `QuoteProduct` `import_duty` method: poor naming - can be confused with import duty rate
 ### Controllers
@@ -21,7 +22,8 @@ Using enums leads to more and more conditional statements(for taxes, import duti
 * empty tests
 ### Routes
 * poor naming
-
+### Misc
+* rubocop frozen string addions are inconsistent. frozen string test to be bypassed since we are not on ruby 3.0+
 # SOLUTION
 The purpose is to make this better for the next developer so let’s do that by determining the preferred outcome through some introspective questioning. 
 ## Scenario 1 (create Separate table for products)
