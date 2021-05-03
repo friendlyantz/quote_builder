@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_23_103010) do
+ActiveRecord::Schema.define(version: 2021_05_03_020420) do
+
+  create_table "items", force: :cascade do |t|
+    t.string "name", null: false
+    t.float "individual_cost", null: false
+    t.float "tax_rate"
+    t.float "import_duty_rate"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "quote_products", force: :cascade do |t|
     t.integer "quote_id", null: false
@@ -18,6 +27,8 @@ ActiveRecord::Schema.define(version: 2021_04_23_103010) do
     t.integer "amount"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "item_id"
+    t.index ["item_id"], name: "index_quote_products_on_item_id"
     t.index ["quote_id"], name: "index_quote_products_on_quote_id"
   end
 
@@ -28,5 +39,6 @@ ActiveRecord::Schema.define(version: 2021_04_23_103010) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "quote_products", "items"
   add_foreign_key "quote_products", "quotes"
 end

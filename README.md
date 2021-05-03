@@ -10,7 +10,7 @@ Using enums leads to more and more conditional statements(for taxes, import duti
 * `QuoteProduct`: poor naming - double ups with it's enum `product` column. product ideally to be moved into a separate table(advanced) or morph into Single Table Inheritance (STI) architecture(simpler) 
 * double up validations for `amount`
 * enum `products` column should be plural
-* `QuoteProduct` `case` logic could be used instead of `if`. However rubocop preference is `'if` logic still, since case should be empty in original code
+* `QuoteProduct` `case` logic could be used instead of `if`.
 * `QuoteProduct``tax` method: poor naming - can be confused with tax rate
 * `QuoteProduct` `import_duty` method: poor naming - can be confused with import duty rate
 ### Controllers
@@ -51,6 +51,11 @@ In a single deployment we add both a new column and the code that depends on it.
 5. Add new item 'Blank Blue Ray Disks"
 
 * at every step we need to ensure existing tests are passing and our app remains functional. Once we remove old features we need to adjust legacy tests accordingly
+## Phase 1: Add a new DB Table 'Item' and add Ref to the Quote_Product table
+write test
+`rails g model Item name:string individual_cost:float tax:float import_duty:float`
+`rails g migration AddItemRefToQuoteProducts item:references`
+
 ______
 
 # ORIGIANAL README
