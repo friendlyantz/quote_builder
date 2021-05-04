@@ -2,6 +2,6 @@ class QuoteProductDecorator < ApplicationDecorator
   delegate_all
 
   def name
-    product.humanize.pluralize
+    item.name.pluralize
   end
 end

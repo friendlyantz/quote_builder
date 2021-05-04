@@ -18,6 +18,7 @@ Using enums leads to more and more conditional statements(for taxes, import duti
 ### Views
 * `simple_form gem` can be a better alternative to standard form
 * financial data can be rounded to 2 decimals
+* qty can be be inputed as negative from UX perspective - shopuld be positive to match backend
 ### Specs
 * empty tests
 ### Routes
@@ -141,7 +142,10 @@ class AddNullConstraintToItemColumnOnQuoteProductsTable < ActiveRecord::Migratio
 end
 ```
 Once we’ve deployed the above phase, we can have complete confidence that all of our QuoteProducts have their item_id reference column filled out.
+## Phase 3: Start referring to 'Item' columns(tax,cost,duties) instead of QuoteProduct `IF` methods. Restrict using the old Quote_Product.product column.
 
+Now that we have a fully working `Quote - QuoteProduct - Item` architecture we can begin to move logic into type specific locations.
+We also want to move away from relying on the SyncQuoteProductItem’s callback and instead have the system work properly.
 ______
 # ORIGIANAL README
 

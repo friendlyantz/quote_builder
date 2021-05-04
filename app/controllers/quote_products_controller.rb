@@ -26,6 +26,6 @@ class QuoteProductsController < ApplicationController
 
   # Only allow a list of trusted parameters through. #FIXME unnecessary comments for CRUD app
   def quote_product_params
-    params.require(:quote_product).permit(:quote_id, :product, :amount)
+    params.require(:quote_product).permit(:quote_id, :product, :amount, :item_id)
   end
 end
