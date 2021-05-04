@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_23_103010) do
+ActiveRecord::Schema.define(version: 2021_05_04_011712) do
+
+  create_table "items", force: :cascade do |t|
+    t.string "name", null: false
+    t.float "individual_cost", null: false
+    t.float "tax_rate", default: 0.0
+    t.float "import_duty_rate", default: 0.0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "quote_products", force: :cascade do |t|
     t.integer "quote_id", null: false
