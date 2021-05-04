@@ -1,10 +1,6 @@
 class QuoteProduct < ApplicationRecord
-  include SyncQuoteProductItem
-
   belongs_to :quote
   belongs_to :item
-
-  enum product: { book: 1, face_mask: 2, first_aid_kit: 3 }  # FIXME: 1. poor naming, should be plural. 2. to be a separate model or column, using STI.
 
   validates :amount, presence: true, inclusion: (1..9999)
 

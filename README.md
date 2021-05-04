@@ -50,7 +50,6 @@ In a single deployment we add both a new column and the code that depends on it.
 2. Enable Quote_Product referencing `Item` table based on enum 'product'. Additionally, backfill existing Quote_Product data’s item column.
 3. Start referring to 'Item' columns(tax,cost,duties) instead of QuoteProduct `IF` methods. Restrict using the old Quote_Product.product column.
 4. With the application relying completely on the new table and the old `product` column disabled we can finally drop the quote_product.product column and any supporting code.
-5. Add new item 'Blank Blue Ray Disks"
 
 * at every step we need to ensure existing tests are passing and our app remains functional. Once we remove old features we need to adjust legacy tests accordingly
 ## Phase 1: Add a new database table called Item AND add references to the Quote_Product table
@@ -146,8 +145,12 @@ end
 Once we’ve deployed the above phase, we can have complete confidence that all of our QuoteProducts have their item_id reference column filled out.
 ## Phase 3: Start referring to 'Item' columns(tax,cost,duties) instead of QuoteProduct `IF` methods. Restrict using the old Quote_Product.product column.
 
-Now that we have a fully working `Quote - QuoteProduct - Item` architecture we can begin to move logic into type specific locations.
-We also want to move away from relying on the SyncQuoteProductItem’s callback and instead have the system work properly.
+- [x] Now that we have a fully working `Quote - QuoteProduct - Item` architecture we can begin to move logic into type specific locations.
+- [x] We also want to move away from relying on the SyncQuoteProductItem’s callback and instead have the system work properly.
+
+## Phase 4: With the application relying completely on the new table and the old `product` column disabled we can finally drop the quote_product.product column and any supporting code.
+
+- [ ] Now database that contains accurate data and all future record creations refer Items from a separate table. Additionally, we have disallowed writing to the old column which allows us to safely remove it from the system. This also means that the system is prepared to function without the column existing. So the only things left are to write a migration to drop the beer_type column and remove the SyncBeerType.
 ______
 # ORIGIANAL README
 
