@@ -18,7 +18,7 @@ RSpec.describe '/quote_products', type: :request do
     { item_id: create(:book).id, amount: 1 }
   end
   let(:invalid_attributes) do
-    { product: :book, amount: '' }
+    { amount: '' }
   end
   # QuoteProduct. As you add validations to QuoteProduct, be sure to
   # adjust the attributes here as well.

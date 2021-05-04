@@ -9,8 +9,6 @@ RSpec.describe QuoteProduct, type: :model do
 
   describe 'cost' do
     context 'when book' do
-      before { product.product = :book }
-
       it 'cost $0.5 plus tax of 10% and import duty 5%' do
         product.amount = 100
         product.item = build(:book)
@@ -20,8 +18,6 @@ RSpec.describe QuoteProduct, type: :model do
     end
 
     context 'when face_mask' do
-      before { product.product = :face_mask }
-
       it 'cost $1 plus and no tax and import duty 5%' do
         product.amount = 100
         product.item = build(:face_mask)
@@ -31,8 +27,6 @@ RSpec.describe QuoteProduct, type: :model do
     end
 
     context 'when first_aid_kit' do
-      before { product.product = :first_aid_kit }
-
       it 'cost $1 plus and no tax and no import duty' do
         product.amount = 100
         product.item = build(:first_aid_kit)
