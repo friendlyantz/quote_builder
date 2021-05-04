@@ -15,6 +15,8 @@ Using enums leads to more and more conditional statements(for taxes, import duti
 ### Controllers
 * unnecessary comments for CRUD app (routes, etc)
 * set_quote method: poor naming. find_quote would be more appropriate
+* `@quote_product.quote_id = params[:quote_id]`: direct params assign could be unsafe. better use Quote.find(params[:quote_id])
+
 ### Views
 * `simple_form gem` can be a better alternative to standard form
 * financial data can be rounded to 2 decimals
