@@ -54,8 +54,22 @@ In a single deployment we add both a new column and the code that depends on it.
 Note: 
 - [x] One thing to avoid at this point is adding a not: null constraint to the new 'item' field. The reason for this is because 'item' doesn't have valid data yet and setting a constraint will only force it to throw exceptions everywhere.
 
-- [ ] we also start assigning newly generated QuoteProduct to Items table
+- [x] we also start assigning newly generated QuoteProduct to Items table
+```ruby
+# This should be removed once QuoteProduct.product is not longer necessary
+module SyncQuoteProductItem
+  extend ActiveSupport::Concern
 
+  included do
+    before_validation :sync_product_item
+  end
+
+  def sync_product_item
+    self.item = Item.find_by(name: product.to_s.humanize) unless product.nil?
+  end
+end
+
+```
 ### App also need to start referencing new Item table based on current product enum name
 
 we can either seed the DB with appropriate products and use find_by to match with enum `product or create Items automatically. 

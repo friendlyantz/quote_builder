@@ -24,6 +24,13 @@ RSpec.describe '/quote_products', type: :request do
     { product: :book, amount: '' }
   end
 
+  before(:context) do
+    puts Item.destroy_all ? 'SKU purge success' : 'SKU purge failed'
+    p create(:book)
+    p create(:face_mask)
+    create(:first_aid_kit)
+  end
+
   describe 'GET /new' do
     it 'renders a successful response' do
       get new_quote_product_url(quote)
