@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe QuoteDecorator do #FIXME empty test
+RSpec.describe QuoteDecorator do
 end

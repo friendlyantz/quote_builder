@@ -3,5 +3,3 @@ FactoryBot.define do
     email { 'test@email.com' }
   end
 end
-
-#FIXME factory for quote_product can be implemented as well

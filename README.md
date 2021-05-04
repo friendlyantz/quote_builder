@@ -3,7 +3,8 @@
 # Code Review
 Using enums leads to more and more conditional statements(for taxes, import duties, etc.). To make matters worse these conditionals end up living in the base Quote_Product model further cluttering its domain. We could move these into a concern but that is essentially equivalent to sweeping the dirt elsewhere. We still have a pattern that left unchecked will lead to bloat in our application.
 ## General
-* `#FIXME` used to review original code and will be added in first commit
+* `Hashtag FIXME` used to review original code and will be added to the first commit
+* SQL Lite DB used. Postgres is much better option and industry standard 
 ### Models
 
 * `QuoteProduct`: poor naming - double ups with it's enum `product` column. product ideally to be moved into a separate table(advanced) or morph into Single Table Inheritance (STI) architecture(simpler) 
@@ -18,13 +19,24 @@ Using enums leads to more and more conditional statements(for taxes, import duti
 * `@quote_product.quote_id = params[:quote_id]`: direct params assign could be unsafe. better use Quote.find(params[:quote_id])
 
 ### Views
+* Quote can't be destroyed
 * `simple_form gem` can be a better alternative to standard form
 * financial data can be rounded to 2 decimals
 * qty can be be inputed as negative from UX perspective - shopuld be positive to match backend
 ### Specs
 * empty tests
 ### Routes
-* poor naming
+* poor naming and unneccessary redirection
+* redirection causes minor warnings for e2e
+### Tests
+* Factories empty
+* Decorator/Draper test empty
+* No rout testing 
+* No controller testing
+* Request specs should be called quote_products_request_spec to avoid confusion with model spec which have almost identical name 
+
+### MISC
+* Draper gem used: this gem is integrated deeply in rails, and might require some wait for draper to be updated to be comparable with latest rails if we decide to update rails
 
 # SOLUTION
 The purpose is to make this better for the next developer so let’s do that by determining the preferred outcome through some introspective questioning. 
@@ -150,7 +162,8 @@ Once we’ve deployed the above phase, we can have complete confidence that all 
 
 ## Phase 4: With the application relying completely on the new table and the old `product` column disabled we can finally drop the quote_product.product column and any supporting code.
 
-- [ ] Now database that contains accurate data and all future record creations refer Items from a separate table. Additionally, we have disallowed writing to the old column which allows us to safely remove it from the system. This also means that the system is prepared to function without the column existing. So the only things left are to write a migration to drop the beer_type column and remove the SyncBeerType.
+- [x] Now database that contains accurate data and all future record creations refer Items from a separate table. Additionally, we have disallowed writing to the old column which allows us to safely remove it from the system. This also means that the system is prepared to function without the column existing. So the only things left are to write a migration to drop the beer_type column and remove the SyncBeerType.
+- [x] cleanup code, update readme
 ______
 # ORIGIANAL README
 

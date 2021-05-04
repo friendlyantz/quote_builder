@@ -2,6 +2,8 @@ class QuoteProductDecorator < ApplicationDecorator
   delegate_all
 
   def name
-    item.name.pluralize
+    return item.name.pluralize if amount > 1
+
+    item.name
   end
 end
