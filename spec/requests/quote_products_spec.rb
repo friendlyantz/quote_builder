@@ -14,21 +14,17 @@ require 'rails_helper'
 
 RSpec.describe '/quote_products', type: :request do
   let(:quote) { FactoryBot.create(:quote) }
-  # QuoteProduct. As you add validations to QuoteProduct, be sure to
-  # adjust the attributes here as well.
   let(:valid_attributes) do
-    { product: :book, amount: 1 }
+    { item_id: create(:book).id, amount: 1 }
   end
-
   let(:invalid_attributes) do
     { product: :book, amount: '' }
   end
+  # QuoteProduct. As you add validations to QuoteProduct, be sure to
+  # adjust the attributes here as well.
 
   before(:context) do
     puts Item.destroy_all ? 'SKU purge success' : 'SKU purge failed'
-    p create(:book)
-    p create(:face_mask)
-    create(:first_aid_kit)
   end
 
   describe 'GET /new' do
