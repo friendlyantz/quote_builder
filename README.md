@@ -17,6 +17,7 @@ Using enums leads to more and more conditional statements(for taxes, import duti
 * set_quote method: poor naming. find_quote would be more appropriate
 ### Views
 * `simple_form gem` can be a better alternative to standard form
+* financial data can be rounded to 2 decimals
 ### Specs
 * empty tests
 ### Routes
@@ -49,6 +50,17 @@ In a single deployment we add both a new column and the code that depends on it.
 5. Add new item 'Blank Blue Ray Disks"
 
 * at every step we need to ensure existing tests are passing and our app remains functional. Once we remove old features we need to adjust legacy tests accordingly
+## Phase 1: Add a new database table called Item AND add references to the Quote_Product table
+Note: 
+- [x] One thing to avoid at this point is adding a not: null constraint to the new 'item' field. The reason for this is because 'item' doesn't have valid data yet and setting a constraint will only force it to throw exceptions everywhere.
+
+- [ ] we also start assigning newly generated QuoteProduct to Items table
+
+### App also need to start referencing new Item table based on current product enum name
+
+we can either seed the DB with appropriate products and use find_by to match with enum `product or create Items automatically. 
+
+Seeding seems to be a safer option as we can narrow down options and modify them later.
 ______
 
 # ORIGIANAL README
