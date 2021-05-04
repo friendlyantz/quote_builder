@@ -54,6 +54,12 @@ In a single deployment we add both a new column and the code that depends on it.
 Note: 
 - [x] One thing to avoid at this point is adding a not: null constraint to the new 'item' field. The reason for this is because 'item' doesn't have valid data yet and setting a constraint will only force it to throw exceptions everywhere.
 
+### App also need to start referencing new Item table based on current product enum name
+
+we can either seed the DB with appropriate products and use find_by to match with enum `product or create Items automatically. 
+
+Seeding seems to be a safer option as we can narrow down options and modify them later.
+
 ## Phase 2a:  Start assigning newly generated QuoteProduct to Items table
 create concern with before callback
 ```ruby
@@ -126,14 +132,17 @@ class BackfillItemRefBasedOnExistingProductEnumData < ActiveRecord::Migration[6.
 end
 
 ```
+Additionally, at this point we can really lock down the item column by adding a database level not: null constraint. This prevents new records from being created or updated if the item column is empty.
+```ruby
+class AddNullConstraintToItemColumnOnQuoteProductsTable < ActiveRecord::Migration[6.1]
+  def change
+    change_column_null :quote_products, :item, false
+  end
+end
+```
+Once we’ve deployed the above phase, we can have complete confidence that all of our QuoteProducts have their item_id reference column filled out.
 
-### App also need to start referencing new Item table based on current product enum name
-
-we can either seed the DB with appropriate products and use find_by to match with enum `product or create Items automatically. 
-
-Seeding seems to be a safer option as we can narrow down options and modify them later.
 ______
-
 # ORIGIANAL README
 
 Coding exercise application to Demostrate:

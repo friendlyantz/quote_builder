@@ -14,6 +14,7 @@ RSpec.describe QuoteProduct, type: :model do
 
       it 'cost $0.5 plus tax of 10% and import duty 5%' do
         product.amount = 100
+        product.item = build(:book)
 
         expect(product.cost).to eq(57.5)
       end
@@ -24,6 +25,7 @@ RSpec.describe QuoteProduct, type: :model do
 
       it 'cost $1 plus and no tax and import duty 5%' do
         product.amount = 100
+        product.item = build(:face_mask)
 
         expect(product.cost).to eq(105)
       end
@@ -34,6 +36,7 @@ RSpec.describe QuoteProduct, type: :model do
 
       it 'cost $1 plus and no tax and no import duty' do
         product.amount = 100
+        product.item = build(:first_aid_kit)
 
         expect(product.cost).to eq(1000)
       end
