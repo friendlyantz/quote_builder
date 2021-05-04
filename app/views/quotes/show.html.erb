@@ -13,11 +13,11 @@
 <ul>
 <% @quote.products.each do |quote_product| %>
   <li>
-    <%= quote_product.amount %> <%= quote_product.name %> for $<%= quote_product.cost %>
+    <%= quote_product.amount %> <%= quote_product.name %> for $<%= quote_product.cost.round(2) %>
     <%= button_to 'Remove', quote_product_path(@quote, quote_product), method: 'delete' %>
   </li>
 <% end %>
-  <li>For a Total of $<%= @quote.total_cost %></li>
+  <li>For a Total of $<%= @quote.total_cost.round(2) %></li>
 </ul>
 
 <%= link_to 'Edit', edit_quote_path(@quote) %> |
