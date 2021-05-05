@@ -18,7 +18,7 @@
         <td><%= quote.email %></td>
         <td><%= link_to 'Show', quote %></td>
         <td><%= link_to 'Edit', edit_quote_path(quote) %></td>
-        <td><%= link_to 'Destroy', quote, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= button_to 'Remove', quote, method: 'delete'%></td>
       </tr>
     <% end %>
   </tbody>

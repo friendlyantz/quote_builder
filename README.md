@@ -20,7 +20,7 @@ Using enums leads to more and more conditional statements(for taxes, import duti
 * `@quote_product.quote_id = params[:quote_id]`: direct params assign could be unsafe. better use Quote.find(params[:quote_id])
 
 ### Views
-* Quote can't be destroyed
+* Quote can't be destroyed - trust this is JavaScript/jquery issue. can be fixed by changing link_to to button_to
 * `simple_form gem` can be a better alternative to standard form
 * financial data can be rounded to 2 decimals
 * qty can be be inputed as negative from UX perspective - shopuld be positive to match backend
