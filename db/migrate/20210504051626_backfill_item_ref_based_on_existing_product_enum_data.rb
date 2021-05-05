@@ -14,15 +14,13 @@ class BackfillItemRefBasedOnExistingProductEnumData < ActiveRecord::Migration[6.
   end
 
   def up
-    puts 'item backfill running up'
-    QuoteProduct.products.keys.each do |product|
+    QuoteProduct.products.each_key do |product|
       update_product(product)
     end
   end
 
   def down
-    puts 'item backfill running rollback'
-    QuoteProduct.products.keys.each do |product|
+    QuoteProduct.products.each_key do |product|
       nullify_product(product)
     end
   end
@@ -30,17 +28,16 @@ class BackfillItemRefBasedOnExistingProductEnumData < ActiveRecord::Migration[6.
   private
 
   def update_product(product)
-    p item = Item.find_by(name: product.to_s.humanize)
+    item = Item.find_by(name: product.to_s.humanize)
 
     QuoteProduct.send(product.to_sym).where(item_id: nil).in_batches do |product_batch|
-      p product_batch.update_all(item_id: item.id)
-    rescue byebug
+      product_batch.update_all(item_id: item.id)
     end
   end
 
   def nullify_product(product)
     QuoteProduct.send(product.to_sym).where.not(item_id: nil).in_batches do |product_batch|
-      p product_batch.update_all(item_id: nil)
+      product_batch.update_all(item_id: nil)
     end
   end
 end

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Quote < ApplicationRecord
-  validates :email, presence: true #FIXME custom message can be added
+  validates :email, presence: true
 
-  has_many :products, class_name: 'QuoteProduct' #FIXME poor naming. QuoteProducts table has enum 'product' Ideally product to be moved into a separate table
+  has_many :products, class_name: 'QuoteProduct', dependent: :destroy
 
   def total_cost
     products.sum(&:cost)

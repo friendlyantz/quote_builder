@@ -13,6 +13,7 @@ Using enums leads to more and more conditional statements(for taxes, import duti
 * `QuoteProduct` model `if` methods: `case` logic can be also used, but if is preferable for rubocop. can also use `then` statement to make logic 1-liner
 * `QuoteProduct``tax` method: poor naming - can be confused with tax rate
 * `QuoteProduct` `import_duty` method: poor naming - can be confused with import duty rate
+* `dependent: :destroy` missing for Quote that hase many Quoted Products. which would allow destroying quote and it's parent product quotes 
 ### Controllers
 * unnecessary comments for CRUD app (routes, etc)
 * set_quote method: poor naming. find_quote would be more appropriate

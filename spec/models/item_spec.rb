@@ -12,7 +12,7 @@ RSpec.describe Item, type: :model do
     it { is_expected.to validate_presence_of(:individual_cost) }
   end
 
-  context 'Factory Girl/Bot testing' do
+  context 'with Factory Girl/Bot builds' do
     let(:book) { build(:book) }
 
     it 'Represents Book' do
