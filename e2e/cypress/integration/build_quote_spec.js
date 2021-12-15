@@ -9,8 +9,15 @@ describe('Quotes', function () {
         cy.contains('Create').click();
         cy.contains('Quote was successfully created.')
 
+        // This calls to the backend to prepare the application state
+        cy.appFactories([
+            ['create', 'item', 'duty5_trait', 'tax10_trait', { name: "Book", individual_cost: "0.5" }],
+            ['create', 'item', 'duty5_trait', 'face_mask_trait'],
+            ['create', 'first_aid_kit']
+        ])
+
         cy.contains('Add Product').click();
-        cy.get('#quote_product_product').select("Book");
+        cy.get('#quote_product_item_id').select("Book");
         cy.get('#quote_product_amount').type("100");
         cy.contains('Add').click();
         cy.contains('product was successfully added.')
@@ -19,7 +26,7 @@ describe('Quotes', function () {
         cy.contains('For a Total of $57.5');
 
         cy.contains('Add Product').click();
-        cy.get('#quote_product_product').select("Face mask");
+        cy.get('#quote_product_item_id').select("Face mask");
         cy.get('#quote_product_amount').type("200");
         cy.contains('Add').click();
         cy.contains('product was successfully added.')
@@ -29,7 +36,7 @@ describe('Quotes', function () {
         cy.contains('For a Total of $267.5');
 
         cy.contains('Add Product').click();
-        cy.get('#quote_product_product').select("First aid kit");
+        cy.get('#quote_product_item_id').select("First aid kit");
         cy.get('#quote_product_amount').type("10");
         cy.contains('Add').click();
         cy.contains('product was successfully added.')
